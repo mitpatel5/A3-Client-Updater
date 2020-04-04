@@ -21,7 +21,8 @@ namespace A3Downloader
     {
 
         #region Initialize Veriables 
-        private string Host = "http://www.a3ultimate.com/patch/";
+        //private string Host = "http://www.a3ultimate.com/patch/";
+        private string Host = "http://localhost/Patch/";
         public string Patch = "Patch.ini";
         public string UpdatesPath = Directory.GetCurrentDirectory()+@"\Updates";
         public string[] fileArray;
@@ -111,15 +112,20 @@ namespace A3Downloader
             // Calculate the download progress in percentages
             PercentProgress = Convert.ToInt32((BytesRead * 100) / TotalBytes);
             // Make progress on the progress bar
-            this.CurrentProgBar.Width = Convert.ToInt32(Math.Round(PercentProgress / 100.0 * 374.0)); 
+            //this.CurrentProgBar.Width = Convert.ToInt32(Math.Round(PercentProgress / 100.0 * 374.0));
+            CurrentProgBar.BeginInvoke(new MethodInvoker(() => CurrentProgBar.Width = Convert.ToInt32(Math.Round(PercentProgress / 100.0 * 374.0))));
             // Display the current progress on the form
-            this.percentLable.Text =  PercentProgress + "%" ;
-            this.SpeedLable.Text = (Convert.ToDouble(BytesRead) / 1024 / sw.Elapsed.TotalSeconds).ToString("0.00") + " kb/s";
+            //this.percentLable.Text =  PercentProgress + "%" ;
+            percentLable.BeginInvoke(new MethodInvoker(() => percentLable.Text = PercentProgress + "%"));
+            //this.SpeedLable.Text = (Convert.ToDouble(BytesRead) / 1024 / sw.Elapsed.TotalSeconds).ToString("0.00") + " kb/s";
+            SpeedLable.BeginInvoke(new MethodInvoker(() => SpeedLable.Text = (Convert.ToDouble(BytesRead) / 1024 / sw.Elapsed.TotalSeconds).ToString("0.00") + " kb/s"));
         }
         private void Download(object startPoint,String url,String destination,String filename){
             try
             {
-                this.StatusLable.Text = "Downloading: "+filename;
+                //this.StatusLable.Text = "Downloading: "+filename;
+                StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "Downloading: " + filename));
+                    
                 Downloading = true;
                 //this.button1.Enabled = true;
                 // Put the object argument into an int variable
@@ -199,7 +205,8 @@ namespace A3Downloader
                 PatchFile.Dispose();
             }
             catch (Exception e) {
-                this.StatusLable.Text = "Unable to connect to a3 ultimate server!!";
+                //this.StatusLable.Text = "Unable to connect to a3 ultimate server!!";
+                StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "Unable to connect to a3 ultimate server!!"));
                 this.Close();
             }
             
@@ -217,7 +224,8 @@ namespace A3Downloader
            
         }
         public void PatchCheker() {
-            this.StatusLable.Text = "Checking Patch Information..";
+            //this.StatusLable.Text = "Checking Patch Information..";
+            StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "Checking Patch Information.."));
             String abc = readFile(UpdatesPath + @"\" + Patch);
             fileArray = Regex.Split(abc, ";");
             for (int i = 0; i < fileArray.Length; i++) { fileArray[i] = fileArray[i].Trim(); }
@@ -229,9 +237,11 @@ namespace A3Downloader
         public void CheckFiles()
         {
             int count = 0;
-            this.TotalProgBar.Width = Convert.ToInt32(0);
+            //this.TotalProgBar.Width = Convert.ToInt32(0);
+            TotalProgBar.BeginInvoke(new MethodInvoker(() => TotalProgBar.Width = Convert.ToInt32(0)));
             int TotalCount = Convert.ToInt32(fileArray[0]);
-            this.StatusLable.Text = "Checking Client ... !!";
+            //this.StatusLable.Text = "Checking Client ... !!";
+            StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "Checking Client ... !!"));
             for (int i = 1; i < TotalCount + 1; i++)
             {
                 if (downloadingFlag == 0)
@@ -240,14 +250,18 @@ namespace A3Downloader
                     string[] FileInfo = file.Split('|');
                     string fileUrl = Host + "" + FileInfo[0].Replace("\r", "").Replace(@"\", "/");
                     string directoryfilename = path + @"\" + FileInfo[0];
-                    this.StatusLable.Text = "Checking:" + "( " + i + "/" + TotalCount + " ) " + FileInfo[0];
+                    //this.StatusLable.Text = "Checking:" + "( " + i + "/" + TotalCount + " ) " + FileInfo[0];
+                    StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "Checking:" + "( " + i + "/" + TotalCount + " ) " + FileInfo[0]));
                     double progrss = (i * 374 / TotalCount);
                     //  MessageBox.Show(Convert.ToString(Convert.ToInt32(progrss)));
                     double lable = progrss * 100 / 374;
 
-                    this.percentLable.Text = "";
-                    this.CurrentProgBar.Width = 0;
-                    this.SpeedLable.Text = "";
+                    //this.percentLable.Text = "";
+                    percentLable.BeginInvoke(new MethodInvoker(() => percentLable.Text = ""));
+                    //this.CurrentProgBar.Width = 0;
+                    CurrentProgBar.BeginInvoke(new MethodInvoker(() => CurrentProgBar.Width = 0));
+                    //this.SpeedLable.Text = "";
+                    SpeedLable.BeginInvoke(new MethodInvoker(() => SpeedLable.Text = ""));
                     if (File.Exists(directoryfilename))
                     {
                         //If file exsist thenpercentLablee hash and check for the hash
@@ -280,14 +294,18 @@ namespace A3Downloader
                         System.Threading.Thread.Sleep(500);
                     }
                     Downloading = false;
-                    this.TotalProgBar.Width = Convert.ToInt32(progrss);
-                    this.TotalLable.Text = Convert.ToInt32(lable) + "%";
+                    //this.TotalProgBar.Width = Convert.ToInt32(progrss);
+                    TotalProgBar.BeginInvoke(new MethodInvoker(() => TotalProgBar.Width = Convert.ToInt32(progrss)));
+                    //this.TotalLable.Text = Convert.ToInt32(lable) + "%";
+                    TotalLable.BeginInvoke(new MethodInvoker(() => TotalLable.Text = Convert.ToInt32(lable) + "%"));
                 }
                 else { goto End; }
             }
-            End:
-            this.StopButton.Enabled = false;
-            this.FullCkeckButton.Enabled = true;
+        End:
+            //this.StopButton.Enabled = false;
+            StopButton.BeginInvoke(new MethodInvoker(() => StopButton.Enabled = false));
+            //this.FullCkeckButton.Enabled = true;
+            FullCkeckButton.BeginInvoke(new MethodInvoker(() => FullCkeckButton.Enabled = false));
         }
         #endregion
 
@@ -324,18 +342,27 @@ namespace A3Downloader
             {
             if (downloadFileList.Count != 0)
             {
-                this.StatusLable.Text = "we need to download " + downloadFileList.Count+" no of files ";
+                //this.StatusLable.Text = "we need to download " + downloadFileList.Count+" no of files ";
+                StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "we need to download " + downloadFileList.Count + " no of files "));
             }
             else {
 
-                this.StatusLable.Text = "Client is up to date";
-                this.percentLable.Text = "";
-                this.SpeedLable.Text = "";
-                this.TotalLable.Text = "";
-                this.TotalProgBar.Width = 374;
-                this.CurrentProgBar.Width = 374;
-                this.Start.Enabled = true;
-                this.Start.Image = A3Downloader.Properties.Resources.startEnabled;
+                //this.StatusLable.Text = "Client is up to date";
+                StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "Client is up to date"));
+                //this.percentLable.Text = "";
+                percentLable.BeginInvoke(new MethodInvoker(() => percentLable.Text = ""));
+                //this.SpeedLable.Text = "";
+                SpeedLable.BeginInvoke(new MethodInvoker(() => SpeedLable.Text = ""));
+                //this.TotalLable.Text = "";
+                TotalLable.BeginInvoke(new MethodInvoker(() => TotalLable.Text = ""));
+                //this.TotalProgBar.Width = 374;
+                TotalProgBar.BeginInvoke(new MethodInvoker(() => TotalProgBar.Width = 374));
+                //this.CurrentProgBar.Width = 374;
+                CurrentProgBar.BeginInvoke(new MethodInvoker(() => CurrentProgBar.Width = 374));
+                //this.Start.Enabled = true;
+                Start.BeginInvoke(new MethodInvoker(() => Start.Enabled = true));
+                //this.Start.Image = A3Downloader.Properties.Resources.startEnabled;
+                Start.BeginInvoke(new MethodInvoker(() => Start.Image = A3Downloader.Properties.Resources.startEnabled));
             }
         
         }
@@ -345,13 +372,19 @@ namespace A3Downloader
         public void extract(string file,int size)
         {
            // System.IO.Compression.
-            this.StatusLable.Text="Extracting : "+ file;
+            //this.StatusLable.Text="Extracting : "+ file;
+            StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "Extracting : " + file));
             
             if (file.Contains(@"\"))
             {
-               
-                UncompressFile(UpdatesPath + @"\" + file, @"\Data", file,size);
-              
+               if(file.Contains("help"))
+               {
+                    UncompressFile(UpdatesPath + @"\" + file, @"\Data\help", file, size);
+               }
+                else
+                {
+                    UncompressFile(UpdatesPath + @"\" + file, @"\Data", file, size);
+                }
             }
             else
             {
@@ -362,28 +395,45 @@ namespace A3Downloader
         }
         public void UncompressFile(string path,string destination,string file,int size)
         {
-            FileStream sourceFile = File.OpenRead(path);
-            //MessageBox.Show(file);
+            //FileStream sourceFile = File.OpenRead(path);
+            ////MessageBox.Show(file);
+            //FileStream destinationFile = File.Create(file);
+            ////MessageBox.Show(destination + @"" + file);
+            //// Because the uncompressed size of the file is unknown, 
+            //// we are using an arbitrary buffer size.
+            //byte[] buffer = new byte[size];
+            //int n;
+
+            //using (GZipStream input = new GZipStream(sourceFile,
+            //    CompressionMode.Decompress, false))
+            //{
+            //    //Console.WriteLine("Decompressing {0} to {1}.", sourceFile.Name, destinationFile.Name);
+
+            //    n = input.Read(buffer, 0, buffer.Length);
+            //    destinationFile.Write(buffer, 0, n);
+            //}
+
+            //// Close the files.
+            //sourceFile.Close();
+            //destinationFile.Close();
+            ////Console.ReadKey();
+            ///
             FileStream destinationFile = File.Create(file);
-            //MessageBox.Show(destination + @"" + file);
-            // Because the uncompressed size of the file is unknown, 
-            // we are using an arbitrary buffer size.
             byte[] buffer = new byte[size];
-            int n;
-
-            using (GZipStream input = new GZipStream(sourceFile,
-                CompressionMode.Decompress, false))
+            int lenght = buffer.Length;
+            using (FileStream sourceFile = File.OpenRead(path))
             {
-                //Console.WriteLine("Decompressing {0} to {1}.", sourceFile.Name, destinationFile.Name);
-
-                n = input.Read(buffer, 0, buffer.Length);
-                destinationFile.Write(buffer, 0, n);
+                int n;
+                using(GZipStream input = new GZipStream(sourceFile,CompressionMode.Decompress))
+                {
+                    while((n = input.Read(buffer,0,lenght))> 0)
+                    {
+                        destinationFile.Write(buffer, 0, n);
+                    }
+                }  
             }
-
-            // Close the files.
-            sourceFile.Close();
             destinationFile.Close();
-            //Console.ReadKey();
+
         }
         #endregion
 
@@ -439,27 +489,49 @@ namespace A3Downloader
 
         #region Start All Processing 
         public void StartAll() {
-           this.StatusLable.Text = "Connecting to the A3 Ultimate Update Server";
-           this.checkPatchFile();
-           this.PatchCheker();
-           this.CheckFiles();
-           this.FinishDownload();
+            try
+            {
+                //string conText = "Connecting To A3 Server";
+
+                //StatusLable.Text = "Connecting to the A3 Ultimate Update Server";
+                StatusLable.BeginInvoke(new MethodInvoker(() => StatusLable.Text = "Connecting To A3 Server"));
+                checkPatchFile();
+                PatchCheker();
+                CheckFiles();
+                FinishDownload();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
        
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            Directory.CreateDirectory("Updates");
-            Directory.CreateDirectory("Updates/Data");
-            if(!Directory.Exists("Data"))
-            Directory.CreateDirectory("Data");
-            this.FullCkeckButton.Enabled = false;
-            this.StopButton.Enabled = true;
-            this.Start.Enabled = false;
-            this.Start.Image = A3Downloader.Properties.Resources.startDisabled;
-            Random rand = new Random();
-            int randome = rand.Next(3);
-           // this.BackgroundImage = Images[randome];
-            this.StartAll();
+            try
+            {
+                Directory.CreateDirectory("Updates");
+                Directory.CreateDirectory("Updates/Data");
+                Directory.CreateDirectory("Updates/Data/help");
+                if (!Directory.Exists("Data"))
+                    Directory.CreateDirectory("Data");
+                if (!Directory.Exists("Data/help"))
+                    Directory.CreateDirectory("Data/help");
+                this.FullCkeckButton.Enabled = false;
+                this.StopButton.Enabled = true;
+                this.Start.Enabled = false;
+                //this.Start.Image = Properties.Resources.startDisabled;
+                //Start.Invoke(new Action(() => Start.Image = Properties.Resources.startDisabled));
+                Start.BeginInvoke(new MethodInvoker(() => Start.Image = Properties.Resources.startDisabled));
+                Random rand = new Random();
+                int randome = rand.Next(3);
+                // this.BackgroundImage = Images[randome];
+                this.StartAll();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
 
@@ -492,8 +564,9 @@ namespace A3Downloader
                 foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
                 directory.Delete(true);
             }
-            System.Threading.Thread.Sleep(100);
-            Environment.Exit(0);
+            //System.Threading.Thread.Sleep(100);
+            //System.Environment.Exit(0);
+            this.Close();
 
         }
 
@@ -534,15 +607,15 @@ namespace A3Downloader
 
         private void Start_Click(object sender, EventArgs e)
         {
-            String client=Directory.GetCurrentDirectory()+@"\A3client.exe";
+            String client=Directory.GetCurrentDirectory()+ @"\A3Elite.exe";
             if (File.Exists(client))
             {
-                System.Diagnostics.Process.Start("A3Client.exe");
+                System.Diagnostics.Process.Start("A3Elite.exe");
                 Environment.Exit(0);
             }
             else 
             {
-                MessageBox.Show("A3Client.exe Not Found Please Run Updater again!","Error!"); 
+                MessageBox.Show("A3Elite.exe Not Found Please Run Updater again!", "Error!"); 
             }
         }
 
@@ -584,42 +657,56 @@ namespace A3Downloader
         #region Links 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://acp.a3ultimate.com/");
+            MessageBox.Show("Coming Soon");
+            //Process.Start("http://acp.a3ultimate.com/");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://acp.a3ultimate.com/ACP/");
+            MessageBox.Show("Coming Soon");
+            //Process.Start("http://acp.a3ultimate.com/ACP/");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://acp.a3ultimate.com/Gallery/View/");
+            MessageBox.Show("Coming Soon");
+
+            //Process.Start("http://acp.a3ultimate.com/Gallery/View/");
         }
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://acp.a3ultimate.com/Auction/View/");
+            MessageBox.Show("Coming Soon");
+
+            //Process.Start("http://acp.a3ultimate.com/Auction/View/");
         }
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://forum.a3ultimate.com/");
+            MessageBox.Show("Coming Soon");
+
+            //Process.Start("http://forum.a3ultimate.com/");
         }
 
         private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://support.a3ultimate.com/");
+            MessageBox.Show("Coming Soon");
+
+            //Process.Start("http://support.a3ultimate.com/");
         }
 
         private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://acp.a3ultimate.com/Downloads/"); 
+            MessageBox.Show("Coming Soon");
+
+            //Process.Start("http://acp.a3ultimate.com/Downloads/"); 
         }
 
         private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://acp.a3ultimate.com/Register");
+            MessageBox.Show("Coming Soon");
+
+            //Process.Start("http://acp.a3ultimate.com/Register");
         }
         #endregion
 

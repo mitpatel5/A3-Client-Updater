@@ -123,7 +123,7 @@
             this.CloseButton.ErrorImage = global::A3Downloader.Properties.Resources.closehov;
             this.CloseButton.Image = global::A3Downloader.Properties.Resources.close;
             this.CloseButton.InitialImage = global::A3Downloader.Properties.Resources.closehov;
-            this.CloseButton.Location = new System.Drawing.Point(768, 3);
+            this.CloseButton.Location = new System.Drawing.Point(763, 2);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(25, 25);
             this.CloseButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -173,7 +173,7 @@
             this.pictureBox1.ErrorImage = global::A3Downloader.Properties.Resources.closehov;
             this.pictureBox1.Image = global::A3Downloader.Properties.Resources.mini;
             this.pictureBox1.InitialImage = global::A3Downloader.Properties.Resources.closehov;
-            this.pictureBox1.Location = new System.Drawing.Point(742, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(736, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(25, 25);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -193,7 +193,7 @@
             this.pictureBox2.ErrorImage = global::A3Downloader.Properties.Resources.closehov;
             this.pictureBox2.Image = global::A3Downloader.Properties.Resources.set;
             this.pictureBox2.InitialImage = global::A3Downloader.Properties.Resources.closehov;
-            this.pictureBox2.Location = new System.Drawing.Point(716, 5);
+            this.pictureBox2.Location = new System.Drawing.Point(705, 2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(25, 25);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -235,7 +235,7 @@
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Home";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.linkLabel1, "A3 Ultimate Home Page");
+            this.toolTip1.SetToolTip(this.linkLabel1, "A3 Elite Home Page");
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.White;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
@@ -275,7 +275,7 @@
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "Gallery";
             this.linkLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.linkLabel3, "A3 Ultimate Image Gallery");
+            this.toolTip1.SetToolTip(this.linkLabel3, "A3 Elite Image Gallery");
             this.linkLabel3.VisitedLinkColor = System.Drawing.Color.White;
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
@@ -288,14 +288,14 @@
             this.linkLabel4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel4.LinkColor = System.Drawing.Color.White;
-            this.linkLabel4.Location = new System.Drawing.Point(284, 47);
+            this.linkLabel4.Location = new System.Drawing.Point(293, 47);
             this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(58, 19);
+            this.linkLabel4.Size = new System.Drawing.Size(38, 19);
             this.linkLabel4.TabIndex = 18;
             this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "Auction";
+            this.linkLabel4.Text = "ROR";
             this.linkLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.linkLabel4, "Auction For Players");
+            this.toolTip1.SetToolTip(this.linkLabel4, "Rules Of Regulation");
             this.linkLabel4.VisitedLinkColor = System.Drawing.Color.White;
             this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
             // 
@@ -396,7 +396,7 @@
             this.webBrowser1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.webBrowser1.AllowNavigation = false;
             this.webBrowser1.AllowWebBrowserDrop = false;
-            this.webBrowser1.Location = new System.Drawing.Point(20, 91);
+            this.webBrowser1.Location = new System.Drawing.Point(13, 79);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
@@ -441,7 +441,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Updater";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "A3 Ultimate Updater";
+            this.Text = "A3 Eliet Updater";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Updater_FormClosing);
             this.Load += new System.EventHandler(this.Updater_Load);
             this.Shown += new System.EventHandler(this.Updater_Shown);

@@ -19,3 +19,13 @@ C:\Projects\A3Downloader\A3Downloader\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Projects\A3Downloader\A3Downloader\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Projects\A3Downloader\A3Downloader\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
 C:\Projects\A3Downloader\A3Downloader\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+D:\A3Code\A3-Client-Updater-master\A3Downloader\bin\Debug\UltimateLauncher.exe.config
+D:\A3Code\A3-Client-Updater-master\A3Downloader\bin\Debug\UltimateLauncher.exe
+D:\A3Code\A3-Client-Updater-master\A3Downloader\bin\Debug\UltimateLauncher.pdb
+D:\A3Code\A3-Client-Updater-master\A3Downloader\obj\x86\Debug\A3Downloader.Properties.Resources.resources
+D:\A3Code\A3-Client-Updater-master\A3Downloader\obj\x86\Debug\A3Downloader.Updater.resources
+D:\A3Code\A3-Client-Updater-master\A3Downloader\obj\x86\Debug\A3Downloader.csproj.GenerateResource.cache
+D:\A3Code\A3-Client-Updater-master\A3Downloader\obj\x86\Debug\A3Downloader.csproj.CoreCompileInputs.cache
+D:\A3Code\A3-Client-Updater-master\A3Downloader\obj\x86\Debug\UltimateLauncher.exe
+D:\A3Code\A3-Client-Updater-master\A3Downloader\obj\x86\Debug\UltimateLauncher.pdb
+D:\A3Code\A3-Client-Updater-master\A3Downloader\obj\x86\Debug\A3Downloader.csprojAssemblyReference.cache
